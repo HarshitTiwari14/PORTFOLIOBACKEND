@@ -7,17 +7,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("Mongo Error", err));
 
-// Routes
-const contactRoutes = require("../routes/contactRoutes"); // Adjusted path!
+const contactRoutes = require("./routes/contactRoutes");
 app.use("/api", contactRoutes);
 
-// ⚠️ DO NOT use app.listen()
+// Optional: health route
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
+});
 
-// Export the handler
-const serverless = require("serverless-http");
-module.exports = serverless(app);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
