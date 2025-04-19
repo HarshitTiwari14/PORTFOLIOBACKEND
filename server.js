@@ -16,7 +16,7 @@ app.use("/api", contactRoutes);
 
 // Optional: health route
 app.get("/", (req, res) => {
-  res.send("Server is up and running!");
+  res.send("Backend deployed successfully 🎉");
 });
 
 const PORT = process.env.PORT || 5000;
